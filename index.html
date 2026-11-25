@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111014">
+  <meta name="description" content="Pulparindo's Club: una idea pequeña, una visión enorme.">
+  <title>Pulparindo's Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="entry" class="entry-screen">
+    <div class="entry-glow"></div>
+    <div class="entry-content">
+      <div class="eyebrow">UN CLUB DIFERENTE</div>
+      <div class="brand brand-large">PULPARINDO'S <span>CLUB</span></div>
+      <div class="entry-line"></div>
+      <p id="entryQuote" class="entry-quote">Las grandes historias comienzan cuando decides construir algo.</p>
+      <button id="enterButton" class="gold-button">ENTRAR A PULPARINDO'S <span>↗</span></button>
+      <p class="entry-foot">MENTALIDAD · VISIÓN · CONSTANCIA</p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Pulparindo's Club">PULPARINDO'S <span>CLUB</span></a>
+    <div class="top-actions">
+      <button id="musicToggle" class="music-pill" aria-label="Pausar o reproducir música">
+        <span class="music-art"></span>
+        <span class="music-copy"><small id="musicStatus">REPRODUCTOR</small><b id="nowPlaying">FRANCIA</b><small id="nextPlaying">SIGUIENTE: 4X4</small></span>
+        <span id="musicState" class="music-state">Ⅱ</span>
+      </button>
+      <button id="adminOpen" class="text-button">ADMIN</button>
+    </div>
+  </header>
+
+  <main id="club" class="main-content">
+    <section class="welcome">
+      <div class="eyebrow">BIENVENIDO AL CLUB</div>
+      <h1>Piensa en grande.<br><em>Construye en serio.</em></h1>
+      <p class="lead">Un proyecto pequeño también puede tener una visión enorme. Lo importante es lo que construyes con cada paso.</p>
+      <div class="welcome-meta"><span class="live-dot"></span> CLUB EN MOVIMIENTO <span class="meta-divider">/</span> EDICIÓN 001</div>
+    </section>
+
+    <section class="quote-panel">
+      <div class="panel-label">MENTALIDAD Y VISIÓN <span>01 / REFLEXIÓN</span></div>
+      <p id="dailyQuote">No necesitas tenerlo todo para empezar. Necesitas una visión y la decisión de avanzar.</p>
+      <button id="newQuote" class="subtle-button">OTRA REFLEXIÓN ↗</button>
+    </section>
+
+    <section class="section-heading">
+      <div><div class="eyebrow">TU ESPACIO</div><h2>El club por dentro</h2></div>
+      <span class="section-index">01—04</span>
+    </section>
+    <div class="feature-grid">
+      <article class="feature-card"><span class="feature-number">01</span><div class="feature-icon">✳</div><h3>Tu progreso</h3><p>Las rachas cuentan en días reales de actividad. Los días sin ventas no te penalizan.</p><span class="card-tag">EN DESARROLLO</span></article>
+      <article class="feature-card"><span class="feature-number">02</span><div class="feature-icon">◇</div><h3>Misiones</h3><p>Retos gratuitos para recuperar el ritmo y sumar logros sin tener que comprar.</p><span class="card-tag">EN DESARROLLO</span></article>
+      <article class="feature-card"><span class="feature-number">03</span><div class="feature-icon">↗</div><h3>Clasificación</h3><p>Reconocimiento por participación y logros, nunca por cuánto dinero gasta alguien.</p><span class="card-tag">EN DESARROLLO</span></article>
+      <article class="feature-card"><span class="feature-number">04</span><div class="feature-icon">▤</div><h3>Periódico del club</h3><p>Noticias, humor y observaciones del pequeño mundo comercial.</p><span class="card-tag">EN DESARROLLO</span></article>
+    </div>
+
+    <section class="news-strip">
+      <div class="news-stamp">BOLETÍN<br>DEL CLUB</div>
+      <div><div class="eyebrow">NOTA COMERCIAL · 001</div><h3>La calculadora también forma parte del negocio.</h3><p>Vender es una cosa. Saber cuánto queda después de los costos es otra.</p></div>
+    </section>
+    <footer><span>PULPARINDO'S CLUB</span><span>EL ÉXITO COMIENZA CON UNA VISIÓN.</span></footer>
+  </main>
+
+  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-card">
+      <button id="adminClose" class="modal-close" aria-label="Cerrar">×</button>
+      <div class="eyebrow">ACCESO PRIVADO</div><h2 id="adminTitle">Administración</h2>
+      <p class="muted">Solo el administrador puede gestionar el catálogo.</p>
+      <form id="loginForm">
+        <label>Correo administrador<input id="email" type="email" autocomplete="username" required></label>
+        <label>Contraseña<input id="password" type="password" autocomplete="current-password" required></label>
+        <button class="gold-button full" type="submit">INICIAR SESIÓN</button>
+      </form>
+      <p id="loginMessage" class="form-message" aria-live="polite"></p>
+      <div id="adminPanel" class="hidden admin-panel">
+        <div class="admin-top"><b>Panel conectado</b><button id="logoutButton" class="text-button">CERRAR SESIÓN</button></div>
+        <form id="productForm" class="admin-form">
+          <h3>Agregar producto</h3>
+          <label>Nombre<input id="productName" required maxlength="60"></label>
+          <div class="two-cols"><label>Precio ($)<input id="productPrice" type="number" min="0.01" step="0.01" required></label><label>Existencias<input id="productStock" type="number" min="0" step="1" required></label></div>
+          <button class="gold-button full" type="submit">GUARDAR PRODUCTO</button>
+        </form>
+        <div class="admin-form"><h3>Productos registrados</h3><div id="productsList" class="products-list">Todavía no hay productos.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer" preload="none"></audio>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
