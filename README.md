@@ -1,41 +1,43 @@
 # Pulparindo's Club
 
-Primera entrega del sitio independiente **Pulparindo's Club**, publicado desde este repositorio.
+Club web con identidad visual inspirada en un empaque amarillo y rojo de dulce de tamarindo.
 
-## Incluido
-- Pantalla de bienvenida con entrada manual.
-- Diseño adaptable a teléfono y computadora.
-- Frases de visión y mentalidad empresarial.
-- Reproductor discreto con canción actual y canción siguiente.
-- Panel de administración con inicio de sesión de Firebase.
-- Alta y consulta de productos en Cloud Firestore.
-- Reglas iniciales de Firestore para restringir operaciones administrativas.
+## Lo que ya funciona en esta versión
+- Entrada al club y diseño adaptable a celular.
+- Identidad visual amarilla, roja y verde, con empaque ilustrado.
+- Música original tipo videojuego generada en el navegador; comienza cuando el visitante entra o pulsa reproducir.
+- Racha de participación manual, con fines de semana excluidos del conteo.
+- Misiones gratuitas, apodo local, puntos e insignias.
+- Minijuego de memoria de parejas.
+- Pregunta interactiva de costos y precio.
+- Panel de administración para productos, preparado para Firebase.
+
+## Importante sobre los datos
+El apodo, puntos, racha, misiones e insignias de esta primera versión se guardan en el navegador del dispositivo mediante almacenamiento local. No se sincronizan entre teléfonos ni constituyen un registro central de clientes. Si se borra el almacenamiento del navegador, esos datos pueden perderse. No se solicitan nombres completos, teléfonos, direcciones ni datos escolares.
+
+La racha se registra manualmente. Los sábados y domingos no rompen la continuidad. Los días festivos o suspensiones escolares todavía deben administrarse con una regla acordada; esta versión no tiene calendario escolar conectado.
+
+Los puntos e insignias son reconocimiento por participar, no dinero ni garantía de premios. No hace falta comprar para jugar o completar misiones.
 
 ## Música
-El reproductor está preparado para estos archivos locales:
-- `assets/audio/francia.mp3`
-- `assets/audio/4x4.mp3`
-- `assets/audio/el-lokeron.mp3`
-- `assets/audio/suzuki.mp3`
+La melodía actual es original y se sintetiza en el navegador; no requiere MP3. Para reproducir canciones específicas, añade únicamente archivos de audio que tengas derecho a publicar y configura la lista del reproductor.
 
-La carpeta `assets/audio` debe contener archivos que tengas derecho a publicar. No se subieron canciones comerciales al repositorio. La reproducción comienza después de pulsar el botón de entrada porque los navegadores bloquean normalmente el autoplay.
-
-## Conectar Firebase
+## Conectar Firebase para administración
 1. Crea un proyecto en https://console.firebase.google.com/.
 2. Registra una aplicación web y copia su configuración.
 3. Sustituye los valores `PEGA_AQUI` en `firebase-config.js`.
-4. En Authentication, activa el proveedor **Email/Password**.
-5. Crea la cuenta administradora en Authentication > Users. No compartas la contraseña.
-6. Crea Firestore Database en modo producción.
-7. Copia el UID de la cuenta administradora y sustituye `UID_ADMIN` en `firestore.rules`.
-8. Publica las reglas desde Firestore > Rules.
+4. En Authentication, activa Email/Password y crea la cuenta administradora.
+5. Crea Firestore Database en modo producción.
+6. Sustituye `UID_ADMIN` en `firestore.rules` por el UID real del administrador y publica las reglas.
 
-## Publicar con GitHub Pages
-En este repositorio, abre Settings > Pages. En Build and deployment elige **Deploy from a branch**, selecciona `main` y `/(root)`, y guarda. GitHub mostrará la dirección cuando termine el despliegue.
+## Publicar
+En GitHub abre Settings > Pages y selecciona **GitHub Actions** en Build and deployment. Después revisa la pestaña Actions para confirmar que el flujo Deploy Pulparindo's Club to GitHub Pages termine correctamente.
 
-## Estado de esta entrega
-Esta es la base visual y técnica, no la plataforma completa. Todavía faltan el registro de ventas, perfiles con apodos, inventario por venta, rachas por días efectivos de actividad, misiones, insignias, premios y clasificación. No se debe presentar esas funciones como activas hasta implementarlas y probarlas.
-
-La clasificación planeada no debe premiar cuánto dinero gasta una persona. Los días sin actividad comercial no deben romper rachas. Para perfiles de compañeros, usa solo apodos y datos mínimos, con permiso antes de publicar información sobre otras personas.
+## Próximas mejoras
+- Sincronización de perfiles y rachas con Firebase.
+- Registro de ventas e inventario.
+- Calendario escolar editable para días festivos y suspensiones.
+- Clasificación por participación, sin premiar el dinero gastado.
+- Más minijuegos y catálogo público de productos.
 
 Nunca publiques contraseñas, claves privadas ni credenciales de cuentas de servicio.
