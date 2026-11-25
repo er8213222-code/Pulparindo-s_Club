@@ -1,98 +1,28 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111014">
-  <meta name="description" content="Pulparindo's Club: una idea pequeña, una visión enorme.">
-  <title>Pulparindo's Club</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffd21c"><meta name="description" content="Pulparindo's Club: dulces, juegos, retos y progreso.">
+<title>Pulparindo's Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="entry" class="entry-screen">
-    <div class="entry-glow"></div>
-    <div class="entry-content">
-      <div class="eyebrow">UN CLUB DIFERENTE</div>
-      <div class="brand brand-large">PULPARINDO'S <span>CLUB</span></div>
-      <div class="entry-line"></div>
-      <p id="entryQuote" class="entry-quote">Las grandes historias comienzan cuando decides construir algo.</p>
-      <button id="enterButton" class="gold-button">ENTRAR A PULPARINDO'S <span>↗</span></button>
-      <p class="entry-foot">MENTALIDAD · VISIÓN · CONSTANCIA</p>
-    </div>
-  </div>
-
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="Pulparindo's Club">PULPARINDO'S <span>CLUB</span></a>
-    <div class="top-actions">
-      <button id="musicToggle" class="music-pill" aria-label="Pausar o reproducir música">
-        <span class="music-art"></span>
-        <span class="music-copy"><small id="musicStatus">REPRODUCTOR</small><b id="nowPlaying">FRANCIA</b><small id="nextPlaying">SIGUIENTE: 4X4</small></span>
-        <span id="musicState" class="music-state">Ⅱ</span>
-      </button>
-      <button id="adminOpen" class="text-button">ADMIN</button>
-    </div>
-  </header>
-
-  <main id="club" class="main-content">
-    <section class="welcome">
-      <div class="eyebrow">BIENVENIDO AL CLUB</div>
-      <h1>Piensa en grande.<br><em>Construye en serio.</em></h1>
-      <p class="lead">Un proyecto pequeño también puede tener una visión enorme. Lo importante es lo que construyes con cada paso.</p>
-      <div class="welcome-meta"><span class="live-dot"></span> CLUB EN MOVIMIENTO <span class="meta-divider">/</span> EDICIÓN 001</div>
-    </section>
-
-    <section class="quote-panel">
-      <div class="panel-label">MENTALIDAD Y VISIÓN <span>01 / REFLEXIÓN</span></div>
-      <p id="dailyQuote">No necesitas tenerlo todo para empezar. Necesitas una visión y la decisión de avanzar.</p>
-      <button id="newQuote" class="subtle-button">OTRA REFLEXIÓN ↗</button>
-    </section>
-
-    <section class="section-heading">
-      <div><div class="eyebrow">TU ESPACIO</div><h2>El club por dentro</h2></div>
-      <span class="section-index">01—04</span>
-    </section>
-    <div class="feature-grid">
-      <article class="feature-card"><span class="feature-number">01</span><div class="feature-icon">✳</div><h3>Tu progreso</h3><p>Las rachas cuentan en días reales de actividad. Los días sin ventas no te penalizan.</p><span class="card-tag">EN DESARROLLO</span></article>
-      <article class="feature-card"><span class="feature-number">02</span><div class="feature-icon">◇</div><h3>Misiones</h3><p>Retos gratuitos para recuperar el ritmo y sumar logros sin tener que comprar.</p><span class="card-tag">EN DESARROLLO</span></article>
-      <article class="feature-card"><span class="feature-number">03</span><div class="feature-icon">↗</div><h3>Clasificación</h3><p>Reconocimiento por participación y logros, nunca por cuánto dinero gasta alguien.</p><span class="card-tag">EN DESARROLLO</span></article>
-      <article class="feature-card"><span class="feature-number">04</span><div class="feature-icon">▤</div><h3>Periódico del club</h3><p>Noticias, humor y observaciones del pequeño mundo comercial.</p><span class="card-tag">EN DESARROLLO</span></article>
-    </div>
-
-    <section class="news-strip">
-      <div class="news-stamp">BOLETÍN<br>DEL CLUB</div>
-      <div><div class="eyebrow">NOTA COMERCIAL · 001</div><h3>La calculadora también forma parte del negocio.</h3><p>Vender es una cosa. Saber cuánto queda después de los costos es otra.</p></div>
-    </section>
-    <footer><span>PULPARINDO'S CLUB</span><span>EL ÉXITO COMIENZA CON UNA VISIÓN.</span></footer>
-  </main>
-
-  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-    <div class="modal-card">
-      <button id="adminClose" class="modal-close" aria-label="Cerrar">×</button>
-      <div class="eyebrow">ACCESO PRIVADO</div><h2 id="adminTitle">Administración</h2>
-      <p class="muted">Solo el administrador puede gestionar el catálogo.</p>
-      <form id="loginForm">
-        <label>Correo administrador<input id="email" type="email" autocomplete="username" required></label>
-        <label>Contraseña<input id="password" type="password" autocomplete="current-password" required></label>
-        <button class="gold-button full" type="submit">INICIAR SESIÓN</button>
-      </form>
-      <p id="loginMessage" class="form-message" aria-live="polite"></p>
-      <div id="adminPanel" class="hidden admin-panel">
-        <div class="admin-top"><b>Panel conectado</b><button id="logoutButton" class="text-button">CERRAR SESIÓN</button></div>
-        <form id="productForm" class="admin-form">
-          <h3>Agregar producto</h3>
-          <label>Nombre<input id="productName" required maxlength="60"></label>
-          <div class="two-cols"><label>Precio ($)<input id="productPrice" type="number" min="0.01" step="0.01" required></label><label>Existencias<input id="productStock" type="number" min="0" step="1" required></label></div>
-          <button class="gold-button full" type="submit">GUARDAR PRODUCTO</button>
-        </form>
-        <div class="admin-form"><h3>Productos registrados</h3><div id="productsList" class="products-list">Todavía no hay productos.</div></div>
-      </div>
-    </div>
-  </div>
-
-  <audio id="audioPlayer" preload="none"></audio>
-  <script type="module" src="app.js"></script>
-</body>
-</html>
+<div id="entry" class="entry-screen"><div class="entry-pack"><div class="pack-kicker">EL CLUB MÁS DULCE</div><div class="pack-logo">PULPARINDO'S</div><div class="pack-club">★ CLUB ★</div><div class="pack-splash">¡ENTRA, JUEGA<br>Y SUMA LOGROS!</div><button id="enterButton" class="btn btn-dark">ENTRAR AL CLUB <span>➜</span></button><small>UNA COMUNIDAD · MUCHAS FORMAS DE PARTICIPAR</small></div></div>
+<header class="topbar"><a class="mini-brand" href="#inicio"><span class="mini-sun">★</span> PULPARINDO'S <b>CLUB</b></a><div class="top-actions"><button id="musicToggle" class="music-pill"><span class="music-dot">♫</span><span><small id="musicStatus">MÚSICA DEL CLUB</small><b id="nowPlaying">AÑADE TU CANCIÓN</b><small id="nextPlaying">EL REPRODUCTOR ESTÁ LISTO</small></span><strong id="musicState">▶</strong></button><button id="adminOpen" class="admin-button">ADMIN</button></div></header>
+<main id="club" class="wrap">
+<section id="inicio" class="hero"><div class="hero-copy"><div class="eyebrow">BIENVENIDO A TU CLUB</div><h1>¡Qué onda!<br><span>¿Listo para jugar?</span></h1><p>Aquí no vienes solo a comprar dulces. Puedes participar en retos, jugar, cuidar tu racha y desbloquear insignias. ¡Todo explicado y sin tener que comprar para participar!</p><a class="btn btn-red" href="#como-funciona">ASÍ FUNCIONA <span>↓</span></a></div><div class="hero-product"><div class="burst">¡NUEVO<br>CLUB!</div><div class="candy-pack"><div class="candy-top">DULCE · PICOSITO · DIVERTIDO</div><div class="candy-name">PULPARINDO</div><div class="candy-flavor">TAMARINDO</div><div class="candy-bottom">PULPA DE TAMARINDO</div></div><div class="price-tag">$3 <small>MXN</small></div></div></section>
+<section class="quick-stats"><div><b id="streakStat">0 días</b><span>MI RACHA</span></div><div><b id="pointsStat">0</b><span>PUNTOS DEL CLUB</span></div><div><b id="badgeStat">0</b><span>INSIGNIAS</span></div></section>
+<section id="como-funciona" class="section how"><div class="section-head"><div><span class="eyebrow">PRIMERO LO PRIMERO</span><h2>¿Qué se hace aquí?</h2></div><span class="section-mark">01</span></div><div class="how-grid"><article><i>1</i><h3>Entra al club</h3><p>Elige un apodo. No necesitas poner tu nombre completo ni datos privados.</p></article><article><i>2</i><h3>Participa</h3><p>Haz retos, juega los minijuegos o registra tu visita cuando estés participando.</p></article><article><i>3</i><h3>Cuida tu racha</h3><p>Tu racha cuenta días de actividad del club, no compras ni dinero gastado.</p></article><article><i>4</i><h3>Desbloquea logros</h3><p>Consigue puntos e insignias por participar. Los premios, si los hay, se anuncian claramente.</p></article></div></section>
+<section class="section streak-section"><div class="section-head"><div><span class="eyebrow">CONSTANCIA, NO COMPRAS</span><h2>Tu racha <span class="flame">🔥</span></h2></div><span class="section-mark">02</span></div><div class="streak-card"><div class="streak-number"><b id="streakBig">0</b><span>DÍAS</span></div><div class="streak-info"><h3>Un día a la vez.</h3><p id="streakMessage">Registra tu participación para comenzar tu racha.</p><div id="streakDots" class="streak-dots"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div><button id="checkinButton" class="btn btn-red">REGISTRAR MI PARTICIPACIÓN</button><small>Solo cuenta una vez por día. No se rompe por fines de semana o días sin actividad escolar.</small></div></div></section>
+<section class="section challenges"><div class="section-head"><div><span class="eyebrow">RETOS GRATUITOS</span><h2>Misiones del club</h2></div><span class="section-mark">03</span></div><p class="section-intro">No tienes que comprar nada. Completa actividades sencillas y suma puntos.</p><div class="mission-grid" id="missionGrid"><article class="mission"><span class="mission-icon">👋</span><b>Preséntate con un apodo</b><p>Elige cómo quieres aparecer en el club.</p><button data-mission="nickname" class="mission-button">COMENZAR</button></article><article class="mission"><span class="mission-icon">🧠</span><b>Reto de memoria</b><p>Encuentra las parejas del minijuego.</p><a href="#juegos" class="mission-button">IR A JUGAR</a></article><article class="mission"><span class="mission-icon">💡</span><b>Mente de negocio</b><p>Responde una pregunta sobre costos y ganancias.</p><button data-mission="business" class="mission-button">RESPONDER</button></article></div></section>
+<section id="juegos" class="section games"><div class="section-head"><div><span class="eyebrow">PAUSA DIVERTIDA</span><h2>Zona de juegos</h2></div><span class="section-mark">04</span></div><div class="games-grid"><article class="game-card"><div class="game-banner memory-banner">🧩</div><div class="game-body"><span class="game-type">MEMORIA</span><h3>Encuentra las parejas</h3><p>Voltea las tarjetas y encuentra los 4 pares. ¡Entrena tu memoria!</p><div id="memoryBoard" class="memory-board"></div><div class="game-actions"><button id="memoryStart" class="btn btn-dark">NUEVA PARTIDA</button><span id="memoryStatus">4 parejas · sin límite de tiempo</span></div></div></article><article class="game-card"><div class="game-banner quiz-banner">💡</div><div class="game-body"><span class="game-type">MINI DESAFÍO</span><h3>¿Sabes hacer cuentas?</h3><p>Un negocio debe conocer sus costos antes de decidir su precio.</p><div id="quizQuestion" class="quiz-question">Si compras un dulce a $1.50 y lo vendes a $3, ¿cuánto queda antes de otros gastos?</div><div id="quizAnswers" class="quiz-answers"><button data-answer="1.5">$1.50</button><button data-answer="3">$3.00</button><button data-answer="4.5">$4.50</button></div><p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p></div></article></div></section>
+<section class="section badges-section"><div class="section-head"><div><span class="eyebrow">TUS LOGROS</span><h2>Vitrina de insignias</h2></div><span class="section-mark">05</span></div><div id="badgeGrid" class="badge-grid"><div class="badge-item locked"><span>🌟</span><b>Primera visita</b><small>Registra tu participación</small></div><div class="badge-item locked"><span>🔥</span><b>Racha de 3</b><small>Participa 3 días activos</small></div><div class="badge-item locked"><span>🧠</span><b>Buena memoria</b><small>Completa el juego</small></div></div></section>
+<section class="section profile-section"><div class="profile-card"><div><span class="eyebrow">TU IDENTIDAD EN EL CLUB</span><h2>¿Cómo te llamamos?</h2><p>Usa un apodo. No publiques tu dirección, teléfono, escuela ni información privada.</p></div><form id="nicknameForm"><input id="nicknameInput" maxlength="16" placeholder="Tu apodo" aria-label="Tu apodo" required><button class="btn btn-dark" type="submit">GUARDAR APODO</button></form><p id="nicknameMessage" class="profile-message"></p></div></section>
+<section class="news-strip"><div class="news-stamp">CLUB<br>NEWS</div><div><span class="eyebrow">IDEA DE NEGOCIO</span><h3>Vender mucho no siempre significa ganar mucho.</h3><p>El costo, el precio y las cuentas también son parte del juego de emprender.</p></div></section>
+<footer><b>PULPARINDO'S CLUB</b><span>JUEGA · PARTICIPA · CONSTRUYE</span><span>Un club para convivir con respeto.</span></footer>
+</main>
+<div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle"><div class="modal-card"><button id="adminClose" class="modal-close" aria-label="Cerrar">×</button><div class="eyebrow">ACCESO PRIVADO</div><h2 id="adminTitle">Administración</h2><p class="muted">Solo el administrador puede gestionar el catálogo.</p><form id="loginForm"><label>Correo administrador<input id="email" type="email" autocomplete="username" required></label><label>Contraseña<input id="password" type="password" autocomplete="current-password" required></label><button class="btn btn-dark full" type="submit">INICIAR SESIÓN</button></form><p id="loginMessage" class="form-message" aria-live="polite"></p><div id="adminPanel" class="hidden admin-panel"><div class="admin-top"><b>Panel conectado</b><button id="logoutButton" class="text-button">CERRAR SESIÓN</button></div><form id="productForm" class="admin-form"><h3>Agregar producto</h3><label>Nombre<input id="productName" required maxlength="60"></label><div class="two-cols"><label>Precio ($)<input id="productPrice" type="number" min="0.01" step="0.01" required></label><label>Existencias<input id="productStock" type="number" min="0" step="1" required></label></div><button class="btn btn-dark full" type="submit">GUARDAR PRODUCTO</button></form><div class="admin-form"><h3>Productos registrados</h3><div id="productsList" class="products-list">Todavía no hay productos.</div></div></div></div></div>
+<audio id="audioPlayer" preload="none"></audio><script type="module" src="app.js"></script>
+</body></html>
