@@ -2,28 +2,74 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffd51c"><meta name="description" content="Pulparindo's Club: tu club de dulces, juegos y recompensas.">
-<title>Pulparindo's Club</title>
+<meta name="theme-color" content="#ffd21c">
+<meta name="description" content="Dulzmo's Club: tu espacio personal para seguir tus compras y novedades.">
+<title>Dulzmo's Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="entry" class="entry"><div class="entry-card"><span class="eyebrow">BIENVENIDO A</span><h1>PULPARINDO'S</h1><div class="club-stamp">★ CLUB ★</div><p>Dulces, juegos y logros. Todo en un solo lugar.</p><button id="enterButton" class="btn btn-dark">ENTRAR AL CLUB →</button><small>¡QUE COMIENCE LA DIVERSIÓN!</small></div></div>
-<header class="topbar"><a class="brand" href="#inicio"><span>★</span> PULPARINDO'S <b>CLUB</b></a><nav><a href="#mi-club">Mi club</a><a href="#juegos">Juegos</a><a href="#insignias">Insignias</a></nav><button id="adminOpen" class="admin-button">ADMIN</button></header>
+<div id="entry" class="entry">
+  <div class="entry-card">
+    <div class="brand-mark">D<span>✦</span></div>
+    <span class="eyebrow">BIENVENIDO A TU CLUB</span>
+    <h1>DULZMO'S<br><em>CLUB</em></h1>
+    <p>Un espacio hecho para los que disfrutan cada dulce.</p>
+    <form id="registerForm" class="register-form">
+      <label for="nicknameInput">¿Cómo te llamas o qué apodo usas?</label>
+      <input id="nicknameInput" maxlength="20" autocomplete="nickname" placeholder="Escribe tu nombre o apodo" required>
+      <button class="btn btn-dark" type="submit">ENTRAR A MI ESPACIO <span>→</span></button>
+    </form>
+    <small>USA SOLO TU NOMBRE O UN APODO. NO ESCRIBAS DATOS PERSONALES.</small>
+    <p id="registerMessage" class="form-message" aria-live="polite"></p>
+  </div>
+</div>
+<header class="topbar">
+  <a class="brand" href="#personal"><span class="brand-icon">D</span> DULZMO'S <b>CLUB</b></a>
+  <div class="top-actions"><span id="headerName" class="header-name"></span><button id="changeUser" class="text-button">Cambiar perfil</button><button id="adminOpen" class="admin-button">ADMIN</button></div>
+</header>
 <main class="wrap">
-<section id="inicio" class="hero"><div><span class="eyebrow">TU CLUB · TUS LOGROS</span><h2>¡Aquí se viene<br><em>a disfrutar!</em></h2><p>Juega, participa y descubre qué hay de nuevo. Tu perfil guarda tus puntos y tus logros.</p><a class="btn btn-red" href="#mi-club">VER MI CLUB ↓</a></div><div class="hero-art"><div class="sunburst">¡DULCE<br>AVENTURA!</div><div class="candy"><small>DULCE · PICOSITO</small><b>PULPA<br>POWER</b><span>TAMARINDO</span><small>EL CLUB</small></div><div class="splash">¡ÑAM!</div></div></section>
-<section id="mi-club" class="section"><div class="section-title"><div><span class="eyebrow">TU ESPACIO</span><h2>Mi club</h2></div><span class="section-number">01</span></div><div class="profile-layout"><article class="profile-panel"><span class="eyebrow">TU PERFIL</span><h3 id="welcomeName">¡Hola, visitante!</h3><p>Elige un apodo para identificar tu progreso en este dispositivo.</p><form id="nicknameForm" class="inline-form"><input id="nicknameInput" maxlength="16" placeholder="Escribe tu apodo" aria-label="Apodo" required><button class="btn btn-dark" type="submit">GUARDAR</button></form><small id="nicknameMessage" aria-live="polite"></small></article><div class="stats"><article><span>⭐</span><b id="pointsStat">0</b><small>PUNTOS</small></article><article><span>🔥</span><b id="streakStat">0</b><small>RACHA</small></article><article><span>🏅</span><b id="badgeStat">0</b><small>INSIGNIAS</small></article></div></div><div class="streak-note"><b>🔥 Tu racha de compras</b><p>Se actualiza cuando el administrador confirma una compra. Los juegos y retos son gratuitos y no necesitas comprar para participar.</p><span id="streakMessage">Tu racha aparecerá aquí cuando se registre tu primera compra.</span></div></section>
-<section class="section products-section"><div class="section-title"><div><span class="eyebrow">CATÁLOGO</span><h2>Dulces del club</h2></div><span class="section-number">02</span></div><p class="subtext">Los productos disponibles se irán mostrando aquí.</p><div id="publicProducts" class="product-grid"><div class="empty-state">Próximamente aparecerán aquí los dulces disponibles.</div></div></section>
-<section id="juegos" class="section"><div class="section-title"><div><span class="eyebrow">JUEGA GRATIS</span><h2>Zona de juegos</h2></div><span class="section-number">03</span></div><div class="games-grid"><article class="game-card"><div class="game-icon">🧩</div><div><span class="eyebrow">MEMORIA</span><h3>Encuentra las parejas</h3><p>Voltea las tarjetas y encuentra los cuatro pares.</p><div id="memoryBoard" class="memory-board"></div><div class="game-foot"><button id="memoryStart" class="btn btn-dark">NUEVA PARTIDA</button><small id="memoryStatus">4 parejas</small></div></div></article><article class="game-card"><div class="game-icon green">💡</div><div><span class="eyebrow">RETO RÁPIDO</span><h3>Cuenta inteligente</h3><p>Aprende a distinguir precio, costo y ganancia.</p><div class="question">Si algo cuesta $1.50 y lo vendes a $3, ¿cuánto queda antes de otros gastos?</div><div id="quizAnswers" class="answers"><button data-answer="1.5">$1.50</button><button data-answer="3">$3.00</button><button data-answer="4.5">$4.50</button></div><small id="quizFeedback" aria-live="polite"></small></div></article></div></section>
-<section id="insignias" class="section"><div class="section-title"><div><span class="eyebrow">TUS CONQUISTAS</span><h2>Mis insignias</h2></div><span class="section-number">04</span></div><div id="badgeGrid" class="badge-grid"></div></section>
-<section class="bottom-banner"><div class="banner-star">★</div><div><span class="eyebrow">RECUERDA</span><h3>¡Puedes jugar aunque hoy no compres!</h3><p>Los retos y minijuegos están abiertos para todos los miembros.</p></div></section>
-<footer><b>PULPARINDO'S CLUB</b><span>DULCES · JUEGOS · LOGROS</span><span>Cuida tus datos: usa solo un apodo.</span></footer>
+  <section id="personal" class="personal">
+    <div class="welcome-line"><span class="eyebrow">TU ESPACIO PERSONAL</span><span class="member-pill">MIEMBRO DULZMO'S</span></div>
+    <h2>¡Qué onda, <em id="welcomeName">miembro</em>!</h2>
+    <p class="intro">Este es tu espacio dentro de Dulzmo's Club. Aquí podrás consultar tu actividad y las compras que el administrador haya registrado a tu nombre.</p>
+    <div class="profile-card">
+      <div class="profile-avatar" id="avatarLetter">D</div>
+      <div class="profile-copy"><span class="eyebrow">TU PERFIL</span><h3 id="profileName">Miembro</h3><p>Tu perfil está identificado con el nombre o apodo que registraste en este dispositivo.</p></div>
+      <button id="editName" class="outline-button">Editar nombre</button>
+    </div>
+    <div class="stats-grid">
+      <article class="stat-card"><span class="stat-symbol">✦</span><b id="purchaseStat">0</b><small>COMPRAS REGISTRADAS</small></article>
+      <article class="stat-card"><span class="stat-symbol">↗</span><b id="streakStat">0</b><small>RACHA ACTUAL</small></article>
+      <article class="stat-card"><span class="stat-symbol">◎</span><b id="pointsStat">—</b><small>PUNTOS</small></article>
+    </div>
+    <section class="activity-card">
+      <div><span class="eyebrow">TU ACTIVIDAD</span><h3>Tu historial está por comenzar</h3><p id="activityMessage">Cuando el administrador registre una compra con tu nombre o apodo, podrá aparecer aquí. Por ahora, este perfil solo queda guardado en este dispositivo.</p></div>
+      <div class="activity-stamp">D<span>✦</span></div>
+    </section>
+    <div class="notice"><b>Un detalle importante</b><p>Registrarte no significa que hayas comprado ni suma puntos automáticamente. Las compras y cualquier recompensa se validan desde administración.</p></div>
+  </section>
+  <footer><b>DULZMO'S CLUB</b><span>UN CLUB. MUCHOS DULCES.</span><span>Perfil local · Solo nombre o apodo</span></footer>
 </main>
-<div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle"><div class="modal-card"><button id="adminClose" class="modal-close" aria-label="Cerrar">×</button><span class="eyebrow">SOLO ADMINISTRADOR</span><h2 id="adminTitle">Panel de control</h2><form id="loginForm"><label>Correo<input id="email" type="email" autocomplete="username" required></label><label>Contraseña<input id="password" type="password" autocomplete="current-password" required></label><button class="btn btn-dark full" type="submit">INICIAR SESIÓN</button></form><p id="loginMessage" class="form-message" aria-live="polite"></p><div id="adminPanel" class="hidden"><div class="admin-heading"><b>Panel activo</b><button id="logoutButton" class="text-button">Cerrar sesión</button></div><div class="admin-tabs"><button class="tab active" data-tab="products">Productos</button><button class="tab" data-tab="sales">Registrar venta</button><button class="tab" data-tab="debts">Deudas</button></div>
-<section id="tab-products" class="admin-tab"><h3>Mi catálogo</h3><p class="hint">Agrega, cambia o elimina dulces cuando quieras. No hay productos obligatorios.</p><form id="productForm"><label>Nombre del dulce<input id="productName" maxlength="60" placeholder="Ej. Pulparindo" required></label><div class="form-row"><label>Precio de venta ($)<input id="productPrice" type="number" min="0.01" step="0.01" placeholder="3.00" required></label><label>Existencias<input id="productStock" type="number" min="0" step="1" placeholder="0" required></label></div><button class="btn btn-red full" type="submit">+ AGREGAR PRODUCTO</button></form><div id="productsList" class="admin-list"></div></section>
-<section id="tab-sales" class="admin-tab hidden"><h3>Registrar una venta</h3><p class="hint">Selecciona un dulce, indica cuántos vendiste y a quién. La venta confirmada actualiza las existencias.</p><form id="saleForm"><label>Producto<select id="saleProduct" required><option value="">Primero agrega productos</option></select></label><div class="form-row"><label>Cantidad<input id="saleQty" type="number" min="1" step="1" value="1" required></label><label>Cliente / apodo<input id="saleCustomer" maxlength="30" placeholder="Opcional"></label></div><div class="total-line">Total <b id="saleTotal">$0.00</b></div><label>¿Cómo pagó?<select id="salePayment"><option value="pagado">Pagó completo</option><option value="fiado">Quedó a deber</option></select></label><button class="btn btn-red full" type="submit">CONFIRMAR VENTA</button></form><div class="admin-list"><h4>Ventas recientes</h4><div id="salesList">Aún no hay ventas registradas.</div></div></section>
-<section id="tab-debts" class="admin-tab hidden"><h3>Lo que me deben</h3><p class="hint">Registra préstamos o dulces fiados. Puedes anotar abonos y el saldo se calcula solo.</p><form id="debtForm"><label>¿Quién debe?<input id="debtPerson" maxlength="30" placeholder="Apodo o nombre" required></label><label>Concepto<input id="debtConcept" maxlength="80" placeholder="Ej. Me pidió prestados $20" required></label><label>Cantidad ($)<input id="debtAmount" type="number" min="0.01" step="0.01" required></label><button class="btn btn-red full" type="submit">REGISTRAR DEUDA</button></form><div class="debt-summary"><span>Total pendiente</span><b id="debtTotal">$0.00</b></div><div id="debtsList" class="admin-list">No hay deudas registradas.</div></section>
-</div></div></div>
+<div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+ <div class="modal-card">
+  <button id="adminClose" class="modal-close" aria-label="Cerrar">×</button>
+  <span class="eyebrow">ACCESO PRIVADO</span><h2 id="adminTitle">Administración</h2>
+  <form id="loginForm">
+   <label>Correo del administrador<input id="email" type="email" autocomplete="username" required></label>
+   <label>Contraseña<input id="password" type="password" autocomplete="current-password" required></label>
+   <button class="btn btn-dark full" type="submit">INICIAR SESIÓN</button>
+  </form>
+  <p id="loginMessage" class="form-message" aria-live="polite"></p>
+  <div id="adminPanel" class="hidden">
+   <div class="admin-heading"><b>Panel activo</b><button id="logoutButton" class="text-button">Cerrar sesión</button></div>
+   <div class="admin-tabs"><button class="tab active" data-tab="products">Dulces</button><button class="tab" data-tab="sales">Ventas</button><button class="tab" data-tab="debts">Deudas</button></div>
+   <section id="tab-products" class="admin-tab"><h3>Inventario de dulces</h3><form id="productForm"><label>Nombre<input id="productName" maxlength="60" required></label><div class="form-row"><label>Precio ($)<input id="productPrice" type="number" min=".01" step=".01" required></label><label>Existencias<input id="productStock" type="number" min="0" step="1" required></label></div><button class="btn btn-red full" type="submit">AGREGAR DULCE</button></form><div id="productsList" class="admin-list"></div></section>
+   <section id="tab-sales" class="admin-tab hidden"><h3>Registrar compra</h3><form id="saleForm"><label>Dulce<select id="saleProduct" required><option value="">Agrega dulces primero</option></select></label><div class="form-row"><label>Cantidad<input id="saleQty" type="number" min="1" step="1" value="1" required></label><label>Nombre o apodo del cliente<input id="saleCustomer" maxlength="30" required></label></div><div class="total-line">Total <b id="saleTotal">$0.00</b></div><label>Pago<select id="salePayment"><option value="pagado">Pagado</option><option value="fiado">Quedó a deber</option></select></label><button class="btn btn-red full" type="submit">CONFIRMAR COMPRA</button></form><div class="admin-list"><h4>Ventas recientes</h4><div id="salesList">Aún no hay ventas.</div></div></section>
+   <section id="tab-debts" class="admin-tab hidden"><h3>Deudas y abonos</h3><form id="debtForm"><label>Quién debe<input id="debtPerson" maxlength="30" required></label><label>Concepto<input id="debtConcept" maxlength="80" required></label><label>Cantidad ($)<input id="debtAmount" type="number" min=".01" step=".01" required></label><button class="btn btn-red full" type="submit">REGISTRAR DEUDA</button></form><div class="debt-summary"><span>Total pendiente</span><b id="debtTotal">$0.00</b></div><div id="debtsList" class="admin-list">No hay deudas.</div></section>
+  </div>
+ </div>
+</div>
 <script type="module" src="app.js"></script>
 </body></html>
