@@ -9,7 +9,7 @@ const save=()=>localStorage.setItem(STORE,JSON.stringify(state));
 const money=n=>"$"+Number(n||0).toFixed(2);
 const safe=s=>String(s??"").trim().slice(0,80);
 const ready=Object.values(firebaseConfig).every(v=>v&&!String(v).startsWith("PEGA_AQUI"));
-let auth=null,db=null,products=[],sales=[],debts=[],unsubscribers=[];
+let auth=null,db=null,products=[],sales=[],debts=[],unsubscribers=[],publicProductsUnsub=null;
 function message(id,text){$(id).textContent=text;}
 $("enterButton").addEventListener("click",()=>{$("entry").classList.add("out");});
 $("adminOpen").addEventListener("click",()=>{$("adminModal").classList.remove("hidden");});
@@ -60,7 +60,6 @@ function renderSales(){const el=$("salesList");el.replaceChildren();if(!sales.le
 function renderDebts(){const el=$("debtsList");el.replaceChildren();const pending=debts.filter(d=>Number(d.saldo)>0);$("debtTotal").textContent=money(pending.reduce((a,d)=>a+Number(d.saldo||0),0));if(!debts.length){el.textContent="No hay deudas registradas.";return;}debts.forEach(d=>{const row=document.createElement("div");row.className="admin-row debt-row";const meta=document.createElement("div");meta.className="debt-meta";const person=document.createElement("b");person.textContent=d.persona||"Sin nombre";const balance=document.createElement("b");balance.textContent=money(d.saldo);meta.append(person,balance);const p=document.createElement("p");p.textContent=(d.concepto||"Deuda")+" · Inicial: "+money(d.monto)+" · Abonado: "+money(Number(d.monto)-Number(d.saldo));row.append(meta,p);if(Number(d.saldo)>0){const actions=document.createElement("div");actions.className="row-actions";const pay=document.createElement("button");pay.className="mini-action";pay.textContent="Registrar abono";pay.addEventListener("click",()=>addPayment(d));const paid=document.createElement("button");paid.className="mini-action";paid.textContent="Marcar pagado";paid.addEventListener("click",()=>settleDebt(d));actions.append(pay,paid);row.append(actions);}else{const done=document.createElement("small");done.textContent="PAGADO";done.style.color="green";row.append(done);}el.append(row);});}
 function listenData(){
  unsubscribers.forEach(fn=>fn());unsubscribers=[];
- unsubscribers.push(onSnapshot(query(collection(db,"productos"),orderBy("creadoEn","desc")),snap=>{products=snap.docs.map(d=>({id:d.id,...d.data()}));renderProducts();},()=>message("loginMessage","No se pudieron leer productos. Revisa las reglas de Firestore.")));
  unsubscribers.push(onSnapshot(query(collection(db,"ventas"),orderBy("creadoEn","desc")),snap=>{sales=snap.docs.map(d=>({id:d.id,...d.data()}));renderSales();},()=>message("loginMessage","No se pudieron leer ventas. Revisa las reglas.")));
  unsubscribers.push(onSnapshot(query(collection(db,"deudas"),orderBy("creadoEn","desc")),snap=>{debts=snap.docs.map(d=>({id:d.id,...d.data()}));renderDebts();},()=>message("loginMessage","No se pudieron leer deudas. Revisa las reglas.")));
 }
@@ -75,7 +74,8 @@ async function addPayment(d){const raw=prompt("¿Cuánto abonó? Saldo actual: "
 async function settleDebt(d){if(!confirm("¿Marcar como pagada la deuda de "+money(d.saldo)+"?"))return;try{await updateDoc(doc(db,"deudas",d.id),{abonos:Number(d.abonos||0)+Number(d.saldo),saldo:0,pagadaEn:serverTimestamp()});}catch{alert("No se pudo actualizar la deuda.");}}
 if(ready){
  const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app);
- onAuthStateChanged(auth,user=>{$("adminPanel").classList.toggle("hidden",!user);$("loginForm").classList.toggle("hidden",!!user);if(user){message("loginMessage","Sesión iniciada.");listenData();}else{unsubscribers.forEach(fn=>fn());unsubscribers=[];products=[];sales=[];debts=[];renderProducts();renderSales();renderDebts();}});
+ publicProductsUnsub=onSnapshot(query(collection(db,"productos"),orderBy("creadoEn","desc")),snap=>{products=snap.docs.map(d=>({id:d.id,...d.data()}));renderProducts();},()=>{});
+ onAuthStateChanged(auth,user=>{$("adminPanel").classList.toggle("hidden",!user);$("loginForm").classList.toggle("hidden",!!user);if(user){message("loginMessage","Sesión iniciada.");listenData();}else{unsubscribers.forEach(fn=>fn());unsubscribers=[];sales=[];debts=[];renderSales();renderDebts();}});
  $("loginForm").addEventListener("submit",async e=>{e.preventDefault();message("loginMessage","Verificando acceso…");try{await signInWithEmailAndPassword(auth,$("email").value,$("password").value);}catch{message("loginMessage","No se pudo iniciar sesión. Revisa el correo, contraseña y Firebase.");}});
  $("logoutButton").addEventListener("click",()=>signOut(auth));
 }else{message("loginMessage","Firebase aún no está conectado. El sitio público y los juegos funcionan; para guardar productos, ventas y deudas entre dispositivos falta conectar Firebase.");$("loginForm").addEventListener("submit",e=>{e.preventDefault();message("loginMessage","Primero hay que conectar Firebase para activar el panel.");});}
