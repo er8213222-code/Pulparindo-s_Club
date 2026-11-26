@@ -19,6 +19,8 @@
     <form id="registerForm" class="register-form">
       <label for="nicknameInput">¿Cómo te llamas o qué apodo usas?</label>
       <input id="nicknameInput" maxlength="20" autocomplete="nickname" placeholder="Escribe tu nombre o apodo" required>
+      <label for="classroomInput">¿En qué salón estás?</label>
+      <input id="classroomInput" maxlength="12" placeholder="Ej. 2°G" required>
       <button class="btn btn-dark" type="submit">ENTRAR A MI ESPACIO <span>→</span></button>
     </form>
     <small>USA SOLO TU NOMBRE O UN APODO. NO ESCRIBAS DATOS PERSONALES.</small>
@@ -36,7 +38,7 @@
     <p class="intro">Este es tu espacio dentro de Dulzmo's Club. Aquí podrás consultar tu actividad y las compras que el administrador haya registrado a tu nombre.</p>
     <div class="profile-card">
       <div class="profile-avatar" id="avatarLetter">D</div>
-      <div class="profile-copy"><span class="eyebrow">TU PERFIL</span><h3 id="profileName">Miembro</h3><p>Tu perfil está identificado con el nombre o apodo que registraste en este dispositivo.</p></div>
+      <div class="profile-copy"><span class="eyebrow">TU PERFIL</span><h3 id="profileName">Miembro</h3><p>Tu perfil está identificado con tu nombre o apodo y tu salón validado.</p><b id="clientStatus">PENDIENTE DE REVISIÓN</b><p id="clientClass">Salón por verificar</p></div>
       <button id="editName" class="outline-button">Editar nombre</button>
     </div>
     <div class="stats-grid">
@@ -46,7 +48,7 @@
     </div>
     <section class="activity-card">
       <div><span class="eyebrow">TU ACTIVIDAD</span><h3>Tu historial está por comenzar</h3><p id="activityMessage">Cuando el administrador registre una compra con tu nombre o apodo, podrá aparecer aquí. Por ahora, este perfil solo queda guardado en este dispositivo.</p></div>
-      <div class="activity-stamp">D<span>✦</span></div>
+      <div class="activity-stamp">D<span>✦</span></div><div id="clientPurchases" class="admin-list">Todavía no hay compras registradas.</div><div id="mySuggestions" class="admin-list">Aún no has enviado sugerencias.</div>
     </section>
     <section class="suggestion-card">
       <div class="suggestion-heading"><span class="eyebrow">TÚ TAMBIÉN DECIDES</span><span class="suggestion-icon">✦</span></div>
@@ -75,9 +77,10 @@
   <p id="loginMessage" class="form-message" aria-live="polite"></p>
   <div id="adminPanel" class="hidden">
    <div class="admin-heading"><b>Panel activo</b><button id="logoutButton" class="text-button">Cerrar sesión</button></div>
-   <div class="admin-tabs"><button class="tab active" data-tab="products">Dulces</button><button class="tab" data-tab="sales">Ventas</button><button class="tab" data-tab="debts">Deudas</button><button class="tab" data-tab="suggestions">Ideas</button></div>
+   <div class="admin-tabs"><button class="tab active" data-tab="products">Dulces</button><button class="tab" data-tab="clients">Clientes</button><button class="tab" data-tab="sales">Ventas</button><button class="tab" data-tab="debts">Deudas</button><button class="tab" data-tab="suggestions">Ideas</button></div>
    <section id="tab-products" class="admin-tab"><h3>Inventario de dulces</h3><form id="productForm"><label>Nombre<input id="productName" maxlength="60" required></label><div class="form-row"><label>Precio ($)<input id="productPrice" type="number" min=".01" step=".01" required></label><label>Existencias<input id="productStock" type="number" min="0" step="1" required></label></div><button class="btn btn-red full" type="submit">AGREGAR DULCE</button></form><div id="productsList" class="admin-list"></div></section>
-   <section id="tab-sales" class="admin-tab hidden"><h3>Registrar compra</h3><form id="saleForm"><label>Dulce<select id="saleProduct" required><option value="">Agrega dulces primero</option></select></label><div class="form-row"><label>Cantidad<input id="saleQty" type="number" min="1" step="1" value="1" required></label><label>Nombre o apodo del cliente<input id="saleCustomer" maxlength="30" required></label></div><div class="total-line">Total <b id="saleTotal">$0.00</b></div><label>Pago<select id="salePayment"><option value="pagado">Pagado</option><option value="fiado">Quedó a deber</option></select></label><button class="btn btn-red full" type="submit">CONFIRMAR COMPRA</button></form><div class="admin-list"><h4>Ventas recientes</h4><div id="salesList">Aún no hay ventas.</div></div></section>
+   <section id="tab-clients" class="admin-tab hidden"><h3>Registros por revisar</h3><p class="admin-hint">Verifica personalmente el nombre y salón antes de aprobar.</p><div id="pendingClients" class="admin-list">No hay registros pendientes.</div></section>
+   <section id="tab-sales" class="admin-tab hidden"><h3>Registrar compra</h3><form id="saleForm"><label>Dulce<select id="saleProduct" required><option value="">Agrega dulces primero</option></select></label><div class="form-row"><label>Cantidad<input id="saleQty" type="number" min="1" step="1" value="1" required></label><label>Cliente aprobado<select id="saleClient" required><option value="">Selecciona un cliente</option></select></label></div><div class="total-line">Total <b id="saleTotal">$0.00</b></div><label>Pago<select id="salePayment"><option value="pagado">Pagado</option><option value="fiado">Quedó a deber</option></select></label><button class="btn btn-red full" type="submit">CONFIRMAR COMPRA</button></form><div class="admin-list"><h4>Ventas recientes</h4><div id="salesList">Aún no hay ventas.</div></div></section>
    <section id="tab-suggestions" class="admin-tab hidden"><h3>Sugerencias de clientes</h3><p class="admin-hint">Ideas que los clientes enviaron desde su perfil.</p><div id="suggestionsList" class="admin-list">Aún no hay sugerencias.</div></section>
    <section id="tab-debts" class="admin-tab hidden"><h3>Deudas y abonos</h3><form id="debtForm"><label>Quién debe<input id="debtPerson" maxlength="30" required></label><label>Concepto<input id="debtConcept" maxlength="80" required></label><label>Cantidad ($)<input id="debtAmount" type="number" min=".01" step=".01" required></label><button class="btn btn-red full" type="submit">REGISTRAR DEUDA</button></form><div class="debt-summary"><span>Total pendiente</span><b id="debtTotal">$0.00</b></div><div id="debtsList" class="admin-list">No hay deudas.</div></section>
   </div>
