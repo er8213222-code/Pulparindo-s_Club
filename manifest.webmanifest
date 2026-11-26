@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Dulzmo's Club",
+  "short_name": "Dulzmo's",
+  "description": "Tu espacio personal dentro de Dulzmo's Club.",
+  "lang": "es-MX",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffd21c",
+  "theme_color": "#ffd21c",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
