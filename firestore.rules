@@ -23,6 +23,19 @@ service cloud.firestore {
       allow read, write: if isAdmin();
     }
 
+    // Los clientes pueden enviar ideas; solo el administrador puede consultarlas o gestionarlas.
+    match /sugerencias/{suggestionId} {
+      allow create: if request.resource.data.keys().hasOnly(["idea", "cliente", "estado", "creadoEn"])
+        && request.resource.data.idea is string
+        && request.resource.data.idea.size() > 0
+        && request.resource.data.idea.size() <= 60
+        && request.resource.data.cliente is string
+        && request.resource.data.cliente.size() <= 20
+        && request.resource.data.estado == "nueva"
+        && request.resource.data.creadoEn == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
