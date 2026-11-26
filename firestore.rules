@@ -2,72 +2,48 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function isAdmin() {
-      return request.auth != null && request.auth.uid == "fCGnabieaWULCia2JfpoqWzowVQ2";
+      return request.auth != null
+        && request.auth.uid == "fCGnabieaWULCia2JfpoqWzowVQ2";
     }
-    function signedIn() { return request.auth != null; }
+
+    function signedIn() {
+      return request.auth != null;
+    }
 
     match /productos/{productId} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
     }
+
     match /clientes/{clientId} {
       allow create: if signedIn()
         && request.auth.uid == clientId
-        && request.resource.data.keys().hasOnly(["nombre","salon","estado","creadoEn","uid"])
+        && request.resource.data.keys().hasOnly(["nombre", "salon", "estado", "creadoEn", "uid"])
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.nombre is string
         && request.resource.data.nombre.size() >= 2
         && request.resource.data.nombre.size() <= 20
-        && request.resource.data.nombre.matches('^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9 ._-]{2,20}
-        && request.resource.data.estado == "pendiente"
-        && request.resource.data.creadoEn == request.time;
-      allow read: if isAdmin() || (signedIn() && request.auth.uid == clientId);
-      allow update, delete: if isAdmin();
-    }
-    match /ventas/{saleId} {
-      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
-      allow create, update, delete: if isAdmin();
-    }
-    match /deudas/{debtId} {
-      allow read, create, update, delete: if isAdmin();
-    }
-    match /sugerencias/{suggestionId} {
-      allow create: if signedIn()
-        && request.resource.data.keys().hasOnly(["idea","cliente","clienteUid","estado","creadoEn"])
-        && request.resource.data.clienteUid == request.auth.uid
-        && request.resource.data.idea is string
-        && request.resource.data.idea.size() > 0
-        && request.resource.data.idea.size() <= 60
-        && request.resource.data.cliente is string
-        && request.resource.data.cliente.size() <= 20
-        && request.resource.data.estado == "nueva"
-        && request.resource.data.creadoEn == request.time;
-      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
-      allow update, delete: if isAdmin();
-    }
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-})
-        && !request.resource.data.nombre.matches('(?i).*(puta|puto|pendej|idiot|mierda|verga|chingad|maric|cabr[oó]n|culo|perra|perro).*')
         && request.resource.data.salon is string
-        && request.resource.data.salon.matches('^[1-6][º°]?[A-Z]
+        && request.resource.data.salon.size() <= 12
         && request.resource.data.estado == "pendiente"
         && request.resource.data.creadoEn == request.time;
       allow read: if isAdmin() || (signedIn() && request.auth.uid == clientId);
       allow update, delete: if isAdmin();
     }
+
     match /ventas/{saleId} {
-      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.clienteUid == request.auth.uid);
       allow create, update, delete: if isAdmin();
     }
+
     match /deudas/{debtId} {
       allow read, create, update, delete: if isAdmin();
     }
+
     match /sugerencias/{suggestionId} {
       allow create: if signedIn()
-        && request.resource.data.keys().hasOnly(["idea","cliente","clienteUid","estado","creadoEn"])
+        && request.resource.data.keys().hasOnly(["idea", "cliente", "clienteUid", "estado", "creadoEn"])
         && request.resource.data.clienteUid == request.auth.uid
         && request.resource.data.idea is string
         && request.resource.data.idea.size() > 0
@@ -76,40 +52,11 @@ service cloud.firestore {
         && request.resource.data.cliente.size() <= 20
         && request.resource.data.estado == "nueva"
         && request.resource.data.creadoEn == request.time;
-      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.clienteUid == request.auth.uid);
       allow update, delete: if isAdmin();
     }
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-})
-        && request.resource.data.estado == "pendiente"
-        && request.resource.data.creadoEn == request.time;
-      allow read: if isAdmin() || (signedIn() && request.auth.uid == clientId);
-      allow update, delete: if isAdmin();
-    }
-    match /ventas/{saleId} {
-      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
-      allow create, update, delete: if isAdmin();
-    }
-    match /deudas/{debtId} {
-      allow read, create, update, delete: if isAdmin();
-    }
-    match /sugerencias/{suggestionId} {
-      allow create: if signedIn()
-        && request.resource.data.keys().hasOnly(["idea","cliente","clienteUid","estado","creadoEn"])
-        && request.resource.data.clienteUid == request.auth.uid
-        && request.resource.data.idea is string
-        && request.resource.data.idea.size() > 0
-        && request.resource.data.idea.size() <= 60
-        && request.resource.data.cliente is string
-        && request.resource.data.cliente.size() <= 20
-        && request.resource.data.estado == "nueva"
-        && request.resource.data.creadoEn == request.time;
-      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
-      allow update, delete: if isAdmin();
-    }
+
     match /{document=**} {
       allow read, write: if false;
     }
