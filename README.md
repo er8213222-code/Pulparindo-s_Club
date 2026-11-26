@@ -1,43 +1,38 @@
 # Pulparindo's Club
 
-Club web con identidad visual inspirada en un empaque amarillo y rojo de dulce de tamarindo.
+Sitio web móvil del club: catálogo de dulces, juegos gratuitos y panel privado para administrar productos, ventas y deudas.
 
-## Lo que ya funciona en esta versión
-- Entrada al club y diseño adaptable a celular.
-- Identidad visual amarilla, roja y verde, con empaque ilustrado.
-- Música original tipo videojuego generada en el navegador; comienza cuando el visitante entra o pulsa reproducir.
-- Racha de participación manual, con fines de semana excluidos del conteo.
-- Misiones gratuitas, apodo local, puntos e insignias.
-- Minijuego de memoria de parejas.
-- Pregunta interactiva de costos y precio.
-- Panel de administración para productos, preparado para Firebase.
+## Interfaz
+- Diseño amarillo, rojo y verde inspirado en empaques de dulces.
+- Perfil con apodo local, puntos de minijuegos e insignias.
+- Catálogo público alimentado por Firebase.
+- Minijuego de memoria y reto de cuentas.
+- No se necesita comprar para jugar.
 
-## Importante sobre los datos
-El apodo, puntos, racha, misiones e insignias de esta primera versión se guardan en el navegador del dispositivo mediante almacenamiento local. No se sincronizan entre teléfonos ni constituyen un registro central de clientes. Si se borra el almacenamiento del navegador, esos datos pueden perderse. No se solicitan nombres completos, teléfonos, direcciones ni datos escolares.
+## Panel de administración
+En el botón ADMIN:
+- Productos: agregar, editar y eliminar dulces; definir precio y existencias.
+- Registrar venta: elegir producto, cantidad y cliente; calcula el total y descuenta existencias.
+- Si una venta queda fiada, crea también una deuda.
+- Deudas: registrar préstamos o conceptos pendientes, consultar saldos, anotar abonos y marcar como pagado.
+- Ventas y deudas solo son visibles para la cuenta administradora.
 
-La racha se registra manualmente. Los sábados y domingos no rompen la continuidad. Los días festivos o suspensiones escolares todavía deben administrarse con una regla acordada; esta versión no tiene calendario escolar conectado.
+## Conectar Firebase
+1. Crea un proyecto en https://console.firebase.google.com/ y registra una aplicación web.
+2. Copia la configuración web y sustituye los valores PEGA_AQUI en firebase-config.js. Esa configuración web no es una contraseña; nunca compartas claves privadas ni archivos de cuenta de servicio.
+3. En Authentication, activa Email/Password y crea la cuenta administradora.
+4. Crea Firestore Database.
+5. En Authentication, abre la cuenta administradora y copia su UID.
+6. Sustituye UID_ADMIN en firestore.rules por ese UID y publica las reglas desde Firestore > Rules.
 
-Los puntos e insignias son reconocimiento por participar, no dinero ni garantía de premios. No hace falta comprar para jugar o completar misiones.
+Las reglas permiten leer el catálogo públicamente, pero reservan ventas, deudas y cambios de productos para el administrador.
 
-## Música
-La melodía actual es original y se sintetiza en el navegador; no requiere MP3. Para reproducir canciones específicas, añade únicamente archivos de audio que tengas derecho a publicar y configura la lista del reproductor.
+## Datos que todavía requieren conexión
+Sin Firebase configurado, el sitio público y los minijuegos pueden mostrarse, pero el catálogo, las ventas y las deudas no se guardan en la nube. El apodo, puntos e insignias del navegador se guardan localmente en ese dispositivo.
 
-## Conectar Firebase para administración
-1. Crea un proyecto en https://console.firebase.google.com/.
-2. Registra una aplicación web y copia su configuración.
-3. Sustituye los valores `PEGA_AQUI` en `firebase-config.js`.
-4. En Authentication, activa Email/Password y crea la cuenta administradora.
-5. Crea Firestore Database en modo producción.
-6. Sustituye `UID_ADMIN` en `firestore.rules` por el UID real del administrador y publica las reglas.
+La racha de compras y la sincronización del perfil entre teléfonos todavía requieren completar la vinculación segura de perfiles de clientes. No se debe permitir que un visitante se asigne compras o rachas a sí mismo.
 
-## Publicar
-En GitHub abre Settings > Pages y selecciona **GitHub Actions** en Build and deployment. Después revisa la pestaña Actions para confirmar que el flujo Deploy Pulparindo's Club to GitHub Pages termine correctamente.
+## Publicación
+En GitHub abre Settings > Pages y selecciona GitHub Actions en Build and deployment. Revisa Actions para confirmar que el flujo de publicación termine correctamente.
 
-## Próximas mejoras
-- Sincronización de perfiles y rachas con Firebase.
-- Registro de ventas e inventario.
-- Calendario escolar editable para días festivos y suspensiones.
-- Clasificación por participación, sin premiar el dinero gastado.
-- Más minijuegos y catálogo público de productos.
-
-Nunca publiques contraseñas, claves privadas ni credenciales de cuentas de servicio.
+No publiques contraseñas, claves privadas ni credenciales de cuentas de servicio.
