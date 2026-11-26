@@ -1,31 +1,41 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Reemplaza UID_ADMIN por el UID de tu cuenta administradora de Firebase Authentication.
     function isAdmin() {
       return request.auth != null && request.auth.uid == "fCGnabieaWULCia2JfpoqWzowVQ2";
     }
+    function signedIn() { return request.auth != null; }
 
-    // El catálogo puede mostrarse públicamente; solo el administrador lo modifica.
     match /productos/{productId} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
     }
-
-    // Datos internos: nunca se exponen al público.
+    match /clientes/{clientId} {
+      allow create: if signedIn()
+        && request.auth.uid == clientId
+        && request.resource.data.keys().hasOnly(["nombre","salon","estado","creadoEn","uid"])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.nombre is string
+        && request.resource.data.nombre.size() >= 2
+        && request.resource.data.nombre.size() <= 20
+        && request.resource.data.salon is string
+        && request.resource.data.salon.size() <= 12
+        && request.resource.data.estado == "pendiente"
+        && request.resource.data.creadoEn == request.time;
+      allow read: if isAdmin() || (signedIn() && request.auth.uid == clientId);
+      allow update, delete: if isAdmin();
+    }
     match /ventas/{saleId} {
-      allow read, create, update, delete: if isAdmin();
+      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
+      allow create, update, delete: if isAdmin();
     }
     match /deudas/{debtId} {
       allow read, create, update, delete: if isAdmin();
     }
-    match /clientes/{clientId} {
-      allow read, write: if isAdmin();
-    }
-
-    // Los clientes pueden enviar ideas; solo el administrador puede consultarlas o gestionarlas.
     match /sugerencias/{suggestionId} {
-      allow create: if request.resource.data.keys().hasOnly(["idea", "cliente", "estado", "creadoEn"])
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(["idea","cliente","clienteUid","estado","creadoEn"])
+        && request.resource.data.clienteUid == request.auth.uid
         && request.resource.data.idea is string
         && request.resource.data.idea.size() > 0
         && request.resource.data.idea.size() <= 60
@@ -33,9 +43,9 @@ service cloud.firestore {
         && request.resource.data.cliente.size() <= 20
         && request.resource.data.estado == "nueva"
         && request.resource.data.creadoEn == request.time;
-      allow read, update, delete: if isAdmin();
+      allow read: if isAdmin() || (signedIn() && resource.data.clienteUid == request.auth.uid);
+      allow update, delete: if isAdmin();
     }
-
     match /{document=**} {
       allow read, write: if false;
     }
